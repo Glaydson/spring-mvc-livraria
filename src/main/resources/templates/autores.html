@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!--/*/ <th:block th:include="fragments/cabecalho :: head"></th:block> /*/-->
+	<!--/*/ <th:block th:include="fragments/modaisAutores :: modaisAutores"></th:block> /*/-->
+	
+		<!--  SCRIPTS PARA EXIBIR OS ALERTAS CONTENDO AS MENSAGENS DE SUCESSO -->
+	<script>
+		// Fecha o modal de cadastro e exibe o alerta com a mensagem de sucesso por 4 segundos.
+		function exibirAlertaSucesso() {
+			$('#novoAutorModal').modal('hide');
+			$("#inclusãoAlert").show();
+			window.setTimeout(function() {
+			    	$("#inclusãoAlert").fadeTo(500, 0).slideUp(500, function(){
+				        	$(this).remove(); 
+			    	});
+			}, 3000);
+		};
+
+		// Fecha o modal de alteração e exibe o alerta com a mensagem de sucesso por 4 segundos.
+		function exibirAlertaSucessoAlteracao() {
+			$('#alterarAutorModal').modal('hide');
+			$("#alteraçãoAlert").show();
+			window.setTimeout(function() {
+			    	$("#alteraçãoAlert").fadeTo(500, 0).slideUp(500, function(){
+				        	$(this).remove(); 
+			    	});
+			}, 3000);
+		} 
+					
+		// Fecha o modal de exclusão e exibe o alerta com a mensagem de sucesso por 4 segundos.
+		function exibirAlertaSucessoExclusao() {
+			$('#excluirAutorModal').modal('hide');
+			$("#exclusãoAlert").show();
+			window.setTimeout(function() {
+			    	$("#exclusãoAlert").fadeTo(500, 0).slideUp(500, function(){
+				        	$(this).remove(); 
+			    	});
+			}, 3000);
+		} 
+
+	</script>
+	
+</head>
+<body>
+	<div class="container">
+	     <!--  INCLUI OS TEMPLATES CONTENDO O MENU E OS ALERTAS DE AUTORES -->
+	     <!--/*/ <th:block th:include="fragments/menu :: menu"></th:block> /*/-->
+	     <!--/*/ <th:block th:include="fragments/alertasAutores :: alertasAutores"></th:block> /*/-->
+		
+	     <h2>Manutenção de Autores</h2>
+	     	<div th:if="${sucesso}"><script>exibirAlertaSucesso();</script></div>
+	     	<div th:if="${sucessoAlteracao}"><script>exibirAlertaSucessoAlteracao();</script></div>
+	     	<div th:if="${sucessoExclusao}"><script>exibirAlertaSucessoExclusao();</script></div>
+    	    <!--  CABEÇALHO DA TABELA DE AUTORES, INCLUINDO LINK PARA INCLUIR NOVO AUTOR -->
+			<table class="table table-bordered table-condensed table-hover table-striped" style="margin: 0px !important">
+			     <tbody>
+			          <tr>
+			              <th class="info text-center" colspan="4">
+			                  Autores Cadastrados
+			                  <a class="close" style="font-size: medium; margin-left: 10px" title="Novo Autor"
+			                        th:href="@{#novoAutorModal}" data-toggle="modal" data-target="#novoAutorModal">
+			                        <i class="glyphicon glyphicon-plus"></i>
+			                  </a>
+			              </th>
+			          </tr>
+			     </tbody>
+			</table>
+	     <!--  CORPO DA TABELA, INCLUINDO A LISTA DE AUTORES -->
+			<table class="table table-bordered table-condensed table-hover table-striped"
+             	style="margin: 0px !important; border-top-width: 0;">
+			     <thead>
+			           <tr>
+							<th class="text-center">ID</th>
+							<th>Nome</th>
+							<th class="text-center">Ações</th>
+			           </tr>
+			     </thead>
+				 <tbody>
+				 	<tr th:each="autor : ${autores}">
+				 		<td style="width: 20%" align="center" th:text="${autor.autorID}">ID</td>
+						<td style="width: 60%">
+							<a href="autor.html"
+								th:href="@{|/autor/${autor.autorID}|}"
+								th:text="|${autor.nome}|">Nome
+							</a>
+						</td>
+						<td style="width: 20%" align="center">
+				            <a th:href="'#'+${autor.autorID}" data-toggle="modal">
+				                <button type="button" class="btn btn-xs btn-default" title="Alterar">
+				                    <i class="glyphicon glyphicon-pencil"></i></button>
+					 		</a>
+					 		<!-- Modal para Alterar um autor -->
+							<div class="modal fade" th:id="${autor.autorID}" tabindex="-1" role="dialog" align="left">
+	     						<div class="modal-dialog">
+	     							<!-- Conteúdo do modal-->
+	          						<div class="modal-content">
+	               						<div class="modal-header">
+	                    					<button type="button" class="close" data-dismiss="modal">&times;</button>
+	                    					<h4 class="modal-title">Alteração de Autor </h4>
+	               						</div>
+	               						<div class="modal-body">
+	                    					<form th:action="@{|/autor/alterar/${autor.autorID}|}" th:object="${autor}" method="POST">
+	                    						<div class="form-group">
+	                              					<label for="autorID">ID</label>
+							    					<input type="text" class="form-control input-sm" th:value="${autor.autorID}" th:id="autorID" th:name="autorID" readonly="readonly"/>
+						      					</div>
+	                         					<div class="form-group">
+	                              					<label for="nome">Nome</label>
+							    					<input type="text" class="form-control input-sm" th:value="${autor.nome}" th:id="nome" th:name="nome"/>
+						      					</div>
+						      					<div class="form-group">
+							    					<label for="pais">País</label>
+							    					<input type="text" class="form-control input-sm" th:value="${autor.pais}" th:id="pais" th:name="pais"/>
+						      					</div>
+						      					<button type="submit" class="btn btn-info btn-sm">Alterar</button>
+						      					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+	                    					</form>
+	               						</div>
+	          						</div>
+	     						</div>
+							</div>  <!--  Fim do modal de alteração -->
+					 		
+							<a th:href="'#excluir'+${autor.autorID}" data-toggle="modal">
+						        <button type="button" class="btn btn-xs btn-default" title="Excluir">
+						            <i class="glyphicon glyphicon-trash"></i></button>
+							</a>
+							<div class="modal fade" th:id="'excluir'+${autor.autorID}" tabindex="-1" role="dialog">
+	    						<div class="modal-dialog">
+	        						<!-- Conteúdo do modal-->
+	        						<div class="modal-content">
+	            						<div class="modal-header">
+	                						<button type="button" class="close" data-dismiss="modal">&times;</button>
+	                						<h4 class="modal-title">Exclusão de Autor </h4>
+	            						</div>
+	            						<div class="modal-body">
+	                						<h3>Deseja realmente excluir o autor <span th:text="|${autor.nome}|"></span></h3>
+	                						<form th:action="@{|/autor/excluir/${autor.autorID}|}" th:object="${autor}" method="POST">
+												<button type="submit" class="btn btn-info btn-sm">Excluir</button>
+												<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+	                						</form>
+	            						</div>
+	        						</div>
+	    						</div>
+							</div>  <!--  Fim do modal de exclusão-->
+				        </td>
+					</tr>
+     			 </tbody>
+		    </table>
+				 
+	
+	</div>  <!--  fim do container -->
+		
+	<!--  INCLUI O RODAPÉ DA PÁGINA -->
+	<!--/*/ <th:block th:include="fragments/rodape :: footer"></th:block> /*/-->
+		
+	
+</body>
+</html>

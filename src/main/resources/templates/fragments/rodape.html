@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div class="container">
+	    <div th:fragment="footer">
+	        <footer>
+	            <div class="container">
+	                <div class="row row-footer">
+	                    <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+							<h5>Links</h5>
+							<ul class="list-unstyled">
+							    <li><a href="#" th:href="@{/}">Home</a></li>
+							    <li><a href="#" th:href="@{/sobre}">Sobre o Livraria WEB</a></li>
+							    <li><a href="#" th:href="@{/listarAutores}">Autores</a></li>
+							    <li><a href="#" th:href="@{/listarEditoras}">Editoras</a></li>
+							    <li><a href="#" th:href="@{/listarLivros}">Livros</a></li>
+							</ul>
+	                    </div>
+	                    <div class="col-xs-12">
+							<p style="padding: 10px;"></p>
+							<p align="center">© Copyright 2018 Livraria Web</p>
+	                    </div>
+	                </div>
+	            </div>
+	        </footer>	
+		       
+	    </div>	<!-- fragment footer -->
+		
+</div> <!--  class container -->
+	
+</body>
+</html>

@@ -1,0 +1,37 @@
+/* Barra horizontal acima da barra de navegação */
+.top-bar{
+    height:5px;
+    background:#ca2129;
+    margin-bottom:1px;
+}
+
+/* Barra de navegação */
+.navbar{
+    margin-bottom:1px;
+    background-color: #9ae49c;
+    font-weight: bold;
+}
+
+/* Hover sobre os elementos da barra de navegação */
+.navbar li:hover{
+    background:#e7e7e7;
+}
+
+/* Estilização do jumbotron */
+.jumbotron {
+    padding:20px 30px 20px 30px;
+    margin:0px auto;
+    background: #7986CB ;
+    color:floralwhite;
+}
+
+.titulo {
+    padding:0px;
+}
+
+/* Linha do rodapé */
+.row-footer {
+  background-color: #c0c0c0;
+  margin: 50px auto;
+  padding: 20px 0px 20px 0px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+   
+   <!--/*/ <th:block th:include="fragments/cabecalho :: head"></th:block> /*/-->
+
+  </head>
+  <body>
+  
+  	<div class="container">
+        <!--/*/ <th:block th:include="fragments/menu :: menu"></th:block> /*/-->
+    </div>  <!--  fim do container -->
+  	
+  
+    <header class="jumbotron">
+
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-xs-12 col-sm-8">
+                    <h1>Livraria Versão Web</h1>
+                    <p style="padding:40px;"></p>
+                    <p>Escolha uma das opções no menu superior</p>
+                </div>
+			    <div class="col-xs-12 col-sm-2">
+				       <p style="padding:20px;"></p>
+				       <img src="imagens/leitura.png" class="img-responsive" th:src="@{imagens/leitura.png}"/>
+			     </div>
+            </div>
+        </div>
+     </header>
+
+	<!--/*/ <th:block th:include="fragments/rodape :: footer"></th:block> /*/-->
+	
+   	
+  </body>
+</html>

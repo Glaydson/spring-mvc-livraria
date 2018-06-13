@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div class="container">
+    <div th:fragment="alertasEditoras">
+        <!--  Alerta para exibir mensagem de sucesso do cadastro -->
+        <div id="inclusãoAlert" style="display:none" class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Editora incluída com sucesso!</strong>
+       </div>
+				
+        <!--  Alerta para exibir mensagem de sucesso da alteração -->
+        <div id="alteraçãoAlert" style="display:none" class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Editora alterada com sucesso!</strong>
+        </div>
+				
+        <!--  Alerta para exibir mensagem de sucesso da exclusão -->
+        <div id="exclusãoAlert" style="display:none" class="alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Editora excluída com sucesso!</strong>
+        </div>
+    </div>	<!-- fragment alertasAutores -->
+</div> <!--  class container -->
+
+		
+</body>
+</html>
